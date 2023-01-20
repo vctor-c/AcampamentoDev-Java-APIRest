@@ -103,7 +103,7 @@ public class StudentController {
         }
         StudentList.remove(selectedStudent);
 
-        return ResponseEntity.ok().body(selectedStudent);
+        return ResponseEntity.ok().body(null);
     }
 
 }
