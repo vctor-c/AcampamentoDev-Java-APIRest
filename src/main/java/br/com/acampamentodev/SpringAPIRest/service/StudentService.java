@@ -2,8 +2,12 @@ package br.com.acampamentodev.SpringAPIRest.service;
 
 import br.com.acampamentodev.SpringAPIRest.entities.Student;
 import br.com.acampamentodev.SpringAPIRest.repository.StudentRepository;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,7 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public List<Student> getAll() {
+
         return studentRepository.findAll();
     }
 
@@ -44,7 +49,11 @@ public class StudentService {
     public Student update(Student studentsNewData, int matricula) {
         Student selectedStudent = selectStudent(matricula);
 
-            BeanUtils.copyProperties(studentsNewData, selectedStudent);
+            selectedStudent.setMatricula(studentsNewData.getMatricula());
+            selectedStudent.setNome(studentsNewData.getNome());
+            selectedStudent.setSobrenome(studentsNewData.getSobrenome());
+            selectedStudent.setCpf(studentsNewData.getCpf());
+
             studentRepository.save(selectedStudent);
 
         return selectedStudent;

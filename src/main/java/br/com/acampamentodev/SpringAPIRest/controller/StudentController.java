@@ -2,6 +2,7 @@ package br.com.acampamentodev.SpringAPIRest.controller;
 
 import br.com.acampamentodev.SpringAPIRest.entities.Student;
 import br.com.acampamentodev.SpringAPIRest.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> inserir(@RequestBody Student student) {
+    public ResponseEntity<Student> inserir(@RequestBody @Valid Student student) {
         alunoService.insert(student);
         return ResponseEntity.created(null).body(student);
     }
