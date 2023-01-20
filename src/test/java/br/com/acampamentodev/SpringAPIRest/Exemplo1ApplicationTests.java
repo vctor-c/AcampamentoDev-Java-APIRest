@@ -1,4 +1,4 @@
-package br.com.acampamentodev.exemplo1;
+package br.com.acampamentodev.SpringAPIRest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

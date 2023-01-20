@@ -1,4 +1,4 @@
-package br.com.acampamentodev.exemplo1;
+package br.com.acampamentodev.SpringAPIRest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

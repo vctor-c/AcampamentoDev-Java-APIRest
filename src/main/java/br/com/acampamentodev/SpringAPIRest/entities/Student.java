@@ -1,4 +1,4 @@
-package br.com.acampamentodev.exemplo1.entities;
+package br.com.acampamentodev.SpringAPIRest.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
