@@ -1,7 +1,9 @@
 package br.com.acampamentodev.SpringAPIRest.service;
 
 import br.com.acampamentodev.SpringAPIRest.entities.Student;
+import br.com.acampamentodev.SpringAPIRest.repository.StudentRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +13,16 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    private List<Student> StudentList = new ArrayList<>();
+    @Autowired
+    StudentRepository studentRepository;
 
     public List<Student> getAll() {
-        return StudentList;
+        return studentRepository.findAll();
     }
 
     private Student selectStudent(int matricula) {
-        Student selectedStudent = null;
-        for (Student student : StudentList) {
-            if (student.getMatricula() == matricula) {
-                selectedStudent = student;
-            }
-        }
-        return selectedStudent;
+
+        return studentRepository.findBymatricula(matricula);
     }
 
 
@@ -34,23 +32,20 @@ public class StudentService {
     }
 
     public Student insert(Student student) {
-        StudentList.add(student);
+        studentRepository.insert(student);
         return student;
     }
 
     public void deleteStudent(Student student) {
-            StudentList.remove(student);
+        studentRepository.delete(student);
     }
-
-
 
 
     public Student update(Student studentsNewData, int matricula) {
         Student selectedStudent = selectStudent(matricula);
 
-        if (selectedStudent != null) {
             BeanUtils.copyProperties(studentsNewData, selectedStudent);
-        }
+            studentRepository.save(selectedStudent);
 
         return selectedStudent;
     }
